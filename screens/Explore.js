@@ -38,6 +38,27 @@ class Explore extends Component {
         this.setState({modalVisible: visible});
     }
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            loading: true,
+            dataSource:[]
+        };
+    }
+
+    componentDidMount() {
+        fetch("http://35.238.205.249/newapp/imagedetail")
+            .then(response => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    loading: false,
+                    dataSource: responseJson
+                })
+            })
+            .catch(error => console.log(error))
+        //to catch the errors if any
+    }
+
     componentWillMount() {
 
         this.scrollY = new Animated.Value(0)
@@ -73,7 +94,19 @@ class Explore extends Component {
 
 
     }
+    renderItem=(data)=>
+        <TouchableOpacity style={styles.list}>
+            <Text>{data.item.name}</Text>
+            <Text >{data.item.address}</Text>
+            <Text >{data.item.price}</Text>
+            <Text >{data.item.company.name}</Text></TouchableOpacity>
     render() {
+        if(this.state.loading){
+            return(
+                <View style={styles.loader}>
+                    <ActivityIndicator size="large" color="#0c9"/>
+                </View>
+            )}
         return (
             <SafeAreaView style={{flex: 1, backgroundColor: '#2a2b2d'}}>
                 <View style={{flex: 1, backgroundColor: '#2a2b2d'}}>
@@ -121,9 +154,10 @@ class Explore extends Component {
                                             onPress={() => {
                                                 this.setModalVisible(true);
                                             }}>
-                                            <Category source={require('../assets/home.jpg')}
-                                                      name="Span"
-                                                      price={252222}
+                                            <Category source={{uri: this.state.dataSource.url}}
+                                                      name={this.state.dataSource.name}
+                                                      price={this.state.dataSource.price}
+                                                      id={this.state.dataSource.id}
 
                                             />
                                         </TouchableHighlight>
@@ -132,9 +166,11 @@ class Explore extends Component {
                                             onPress={() => {
                                                 this.setModalVisible(true);
                                             }}>
-                                            <Category source={require('../assets/home.jpg')}
-                                                  name="Ben"
-                                                  price={252222}
+                                            <Category source={{uri: this.state.dataSource.url}}
+                                                      name={this.state.dataSource.name}
+                                                      price={this.state.dataSource.price}
+                                                      id={this.state.dataSource.id}
+
                                             />
                                         </TouchableHighlight>
 
@@ -142,19 +178,11 @@ class Explore extends Component {
                                             onPress={() => {
                                                 this.setModalVisible(true);
                                             }}>
-                                            <Category source={require('../assets/home.jpg')}
-                                                  name="Victoria"
-                                                  price={252222}
-                                             />
-                                        </TouchableHighlight>
+                                            <Category source={{uri: this.state.dataSource.url}}
+                                                      name={this.state.dataSource.name}
+                                                      price={this.state.dataSource.price}
+                                                      id={this.state.dataSource.id}
 
-                                        <TouchableHighlight
-                                            onPress={() => {
-                                                this.setModalVisible(true);
-                                            }}>
-                                            <Category source={require('../assets/home.jpg')}
-                                                  name="Rush"
-                                                  price={252222}
                                             />
                                         </TouchableHighlight>
 
@@ -162,9 +190,11 @@ class Explore extends Component {
                                             onPress={() => {
                                                 this.setModalVisible(true);
                                             }}>
-                                            <Category source={require('../assets/home.jpg')}
-                                                  name="Blue Ocean"
-                                                  price={252222}
+                                            <Category source={{uri: this.state.dataSource.url}}
+                                                      name={this.state.dataSource.name}
+                                                      price={this.state.dataSource.price}
+                                                      id={this.state.dataSource.id}
+
                                             />
                                         </TouchableHighlight>
 
@@ -172,9 +202,23 @@ class Explore extends Component {
                                             onPress={() => {
                                                 this.setModalVisible(true);
                                             }}>
-                                            <Category source={require('../assets/home.jpg')}
-                                                  name="KenTower"
-                                                  price={252222}
+                                            <Category source={{uri: this.state.dataSource.url}}
+                                                      name={this.state.dataSource.name}
+                                                      price={this.state.dataSource.price}
+                                                      id={this.state.dataSource.id}
+
+                                            />
+                                        </TouchableHighlight>
+
+                                        <TouchableHighlight
+                                            onPress={() => {
+                                                this.setModalVisible(true);
+                                            }}>
+                                            <Category source={{uri: this.state.dataSource.url}}
+                                                      name={this.state.dataSource.name}
+                                                      price={this.state.dataSource.price}
+                                                      id={this.state.dataSource.id}
+
                                             />
                                         </TouchableHighlight>
                                     </ScrollView>
@@ -192,9 +236,10 @@ class Explore extends Component {
                                                 onPress={() => {
                                                     this.setModalVisible(true);
                                                 }}>
-                                                <Category source={require('../assets/home.jpg')}
-                                                          name="Span"
-                                                          price={252222}
+                                                <Category source={{uri: this.state.dataSource.url}}
+                                                          name={this.state.dataSource.name}
+                                                          price={this.state.dataSource.price}
+                                                          id={this.state.dataSource.id}
 
                                                 />
                                             </TouchableHighlight>
@@ -203,9 +248,11 @@ class Explore extends Component {
                                                 onPress={() => {
                                                     this.setModalVisible(true);
                                                 }}>
-                                                <Category source={require('../assets/home.jpg')}
-                                                          name="Ben"
-                                                          price={252222}
+                                                <Category source={{uri: this.state.dataSource.url}}
+                                                          name={this.state.dataSource.name}
+                                                          price={this.state.dataSource.price}
+                                                          id={this.state.dataSource.id}
+
                                                 />
                                             </TouchableHighlight>
 
@@ -213,9 +260,11 @@ class Explore extends Component {
                                                 onPress={() => {
                                                     this.setModalVisible(true);
                                                 }}>
-                                                <Category source={require('../assets/home.jpg')}
-                                                          name="Victoria"
-                                                          price={252222}
+                                                <Category source={{uri: this.state.dataSource.url}}
+                                                          name={this.state.dataSource.name}
+                                                          price={this.state.dataSource.price}
+                                                          id={this.state.dataSource.id}
+
                                                 />
                                             </TouchableHighlight>
 
@@ -223,9 +272,11 @@ class Explore extends Component {
                                                 onPress={() => {
                                                     this.setModalVisible(true);
                                                 }}>
-                                                <Category source={require('../assets/home.jpg')}
-                                                          name="Rush"
-                                                          price={252222}
+                                                <Category source={{uri: this.state.dataSource.url}}
+                                                          name={this.state.dataSource.name}
+                                                          price={this.state.dataSource.price}
+                                                          id={this.state.dataSource.id}
+
                                                 />
                                             </TouchableHighlight>
 
@@ -233,9 +284,11 @@ class Explore extends Component {
                                                 onPress={() => {
                                                     this.setModalVisible(true);
                                                 }}>
-                                                <Category source={require('../assets/home.jpg')}
-                                                          name="Blue Ocean"
-                                                          price={252222}
+                                                <Category source={{uri: this.state.dataSource.url}}
+                                                          name={this.state.dataSource.name}
+                                                          price={this.state.dataSource.price}
+                                                          id={this.state.dataSource.id}
+
                                                 />
                                             </TouchableHighlight>
 
@@ -243,9 +296,11 @@ class Explore extends Component {
                                                 onPress={() => {
                                                     this.setModalVisible(true);
                                                 }}>
-                                                <Category source={require('../assets/home.jpg')}
-                                                          name="KenTower"
-                                                          price={252222}
+                                                <Category source={{uri: this.state.dataSource.url}}
+                                                          name={this.state.dataSource.name}
+                                                          price={this.state.dataSource.price}
+                                                          id={this.state.dataSource.id}
+
                                                 />
                                             </TouchableHighlight>
                                         </ScrollView>
@@ -267,9 +322,10 @@ class Explore extends Component {
                                                 onPress={() => {
                                                     this.setModalVisible(true);
                                                 }}>
-                                                <Category source={require('../assets/home.jpg')}
-                                                          name="Span"
-                                                          price={252222}
+                                                <Category source={{uri: this.state.dataSource.url}}
+                                                          name={this.state.dataSource.name}
+                                                          price={this.state.dataSource.price}
+                                                          id={this.state.dataSource.id}
 
                                                 />
                                             </TouchableHighlight>
@@ -278,9 +334,11 @@ class Explore extends Component {
                                                 onPress={() => {
                                                     this.setModalVisible(true);
                                                 }}>
-                                                <Category source={require('../assets/home.jpg')}
-                                                          name="Ben"
-                                                          price={252222}
+                                                <Category source={{uri: this.state.dataSource.url}}
+                                                          name={this.state.dataSource.name}
+                                                          price={this.state.dataSource.price}
+                                                          id={this.state.dataSource.id}
+
                                                 />
                                             </TouchableHighlight>
 
@@ -288,9 +346,11 @@ class Explore extends Component {
                                                 onPress={() => {
                                                     this.setModalVisible(true);
                                                 }}>
-                                                <Category source={require('../assets/home.jpg')}
-                                                          name="Victoria"
-                                                          price={252222}
+                                                <Category source={{uri: this.state.dataSource.url}}
+                                                          name={this.state.dataSource.name}
+                                                          price={this.state.dataSource.price}
+                                                          id={this.state.dataSource.id}
+
                                                 />
                                             </TouchableHighlight>
 
@@ -298,9 +358,11 @@ class Explore extends Component {
                                                 onPress={() => {
                                                     this.setModalVisible(true);
                                                 }}>
-                                                <Category source={require('../assets/home.jpg')}
-                                                          name="Rush"
-                                                          price={252222}
+                                                <Category source={{uri: this.state.dataSource.url}}
+                                                          name={this.state.dataSource.name}
+                                                          price={this.state.dataSource.price}
+                                                          id={this.state.dataSource.id}
+
                                                 />
                                             </TouchableHighlight>
 
@@ -308,9 +370,11 @@ class Explore extends Component {
                                                 onPress={() => {
                                                     this.setModalVisible(true);
                                                 }}>
-                                                <Category source={require('../assets/home.jpg')}
-                                                          name="Blue Ocean"
-                                                          price={252222}
+                                                <Category source={{uri: this.state.dataSource.url}}
+                                                          name={this.state.dataSource.name}
+                                                          price={this.state.dataSource.price}
+                                                          id={this.state.dataSource.id}
+
                                                 />
                                             </TouchableHighlight>
 
@@ -318,9 +382,11 @@ class Explore extends Component {
                                                 onPress={() => {
                                                     this.setModalVisible(true);
                                                 }}>
-                                                <Category source={require('../assets/home.jpg')}
-                                                          name="KenTower"
-                                                          price={252222}
+                                                <Category source={{uri: this.state.dataSource.url}}
+                                                          name={this.state.dataSource.name}
+                                                          price={this.state.dataSource.price}
+                                                          id={this.state.dataSource.id}
+
                                                 />
                                             </TouchableHighlight>
                                         </ScrollView>
