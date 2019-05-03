@@ -58,6 +58,25 @@ class Explore extends Component {
             .catch(error => console.log(error))
         //to catch the errors if any
     }
+    GetListViewItem (name) {
+
+        Alert.alert(name);
+
+    }
+
+    SearchFilterFunction(text){
+
+        const newData = this.dataSource.filter(function(item){
+            const itemData = item.name.toUpperCase();
+            const textData = text.toUpperCase();
+            return itemData.indexOf(textData) > -1
+        });
+        this.setState({
+            dataSource: this.state.dataSource.cloneWithRows(newData),
+            text: text
+        })
+    }
+
 
     componentWillMount() {
 
@@ -125,11 +144,28 @@ class Explore extends Component {
                         }}>
                                 <Icon active name="search"/>
                                 <TextInput
+                                    onChangeText={(text) => this.SearchFilterFunction(text)}
+                                    value={this.state.text}
                                     underlineColorAndroid="transparent"
                                     placeholder="Search"
                                     placeholderTextColor="grey"
                                     style={{flex: 1, fontWeight: '700', backgroundColor: 'white', alignItems: 'center'}}
                                 />
+                            <ListView
+
+                                dataSource={this.state.dataSource}
+
+                                renderSeparator= {this.ListViewItemSeparator}
+
+                                renderRow={(rowData) => <Text style={styles.rowViewContainer}
+
+                                                              onPress={this.GetListViewItem.bind(this, rowData.name)} >{rowData.name}</Text>}
+
+                                enableEmptySections={true}
+
+                                style={{marginTop: 10}}
+
+                            />
                         </View>
                         </Animated.View>
                         <ScrollView
@@ -448,5 +484,20 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    rowViewContainer: {
+        fontSize: 17,
+        padding: 10
+    },
+
+    TextInputStyleClass:{
+
+        textAlign: 'center',
+        height: 40,
+        borderWidth: 1,
+        borderColor: '#009688',
+        borderRadius: 7 ,
+        backgroundColor : "#FFFFFF"
+
     }
 });
