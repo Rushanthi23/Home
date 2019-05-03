@@ -157,9 +157,9 @@ class Explore extends Component {
 
                                 renderSeparator= {this.ListViewItemSeparator}
 
-                                renderRow={(rowData) => <Text style={styles.rowViewContainer}
-
-                                                              onPress={this.GetListViewItem.bind(this, rowData.name)} >{rowData.name}</Text>}
+                                renderRow={(rowData) =>
+                                    <Text style={styles.rowViewContainer}
+                                    onPress={this.GetListViewItem.bind(this, rowData.name)} >{rowData.name}</Text>}
 
                                 enableEmptySections={true}
 
@@ -447,7 +447,8 @@ class Explore extends Component {
                             )}
                         >
 
-                                <View style={{ height: 700, width: 390, marginLeft: 10, marginRight: 10,marginTop: 10, borderWidth: 0.5, borderColor: '#dddddd' }}>
+                                <View style={{ height: 700, width: 390, marginLeft: 10, marginRight: 10,marginTop: 10,
+                                    borderWidth: 0.5, borderColor: '#dddddd' }}>
                                     <View style={{ flex: 2 }}>
                                         <Image source={require('../assets/experiences.jpg')}
                                                style={{ flex: 1, width: 390, height: 200, resizeMode: 'cover' }}
@@ -462,8 +463,10 @@ class Explore extends Component {
                                         onPress={() => {
                                             this.setModalVisible(!this.state.modalVisible);
                                         }}>
-                                        <View style={{height: 50,width: 100, borderWidth: 0.3, borderColor:'#dddddd', backgroundColor: '#2a2b2d'}}>
-                                            <Text style={{fontSize: 16, fontWeight: '200', shadowColor: 'white'}}>Back</Text>
+                                        <View style={{height: 50,width: 100, borderWidth: 0.3, borderColor:'#dddddd',
+                                            backgroundColor: '#2a2b2d'}}>
+                                            <Text style={{fontSize: 16, fontWeight: '200', shadowColor: 'white'}}>Back
+                                            </Text>
                                         </View>
                                     </TouchableHighlight>
                                 </View>
