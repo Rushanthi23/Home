@@ -360,9 +360,9 @@ class Explore extends Component {
                                         onPress={() => {
                                             this.setModalVisible(!this.state.modalVisible);
                                         }}>
-
-                                            <Button color='#2a2b2d' title= "Back" />
-
+                                        <View style={{height: 50,width: 100, borderWidth: 0.3, borderColor:'#dddddd', backgroundColor: '#2a2b2d'}}>
+                                            <Text style={{fontSize: 16, fontWeight: '200', shadowColor: 'white'}}>Back</Text>
+                                        </View>
                                     </TouchableHighlight>
                                 </View>
 
