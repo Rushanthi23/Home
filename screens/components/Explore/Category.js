@@ -12,10 +12,10 @@ import Explore from "../../Explore";
 class Category extends Component {
     render() {
         return (
-            <View style={{ height: 250, width: '250', marginLeft: 20, borderWidth: 0.5, borderColor: '#dddddd' }}>
+            <View style={{ height: 250, width: 250, marginLeft: 20, borderWidth: 0.5, borderColor: '#dddddd' }}>
                 <View style={{ flex: 2 }}>
                     <Image source={this.props.source}
-                           style={{ flex: 1, width: '230', height: 100, resizeMode: 'cover' }}
+                           style={{ flex: 1, width: null, height: null, resizeMode: 'cover' }}
                     />
                 </View>
                 <View style={{ flex: 1, paddingLeft: 10, paddingTop: 10 }}>

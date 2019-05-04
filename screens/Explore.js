@@ -24,6 +24,7 @@ import {Navigator} from 'react-native-deprecated-custom-components';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import MapView from "react-native-maps";
 import Category from './components/Explore/Category'
+import Saved from "./Saved";
 const { height, width } = Dimensions.get('window')
 
 //type Props = {};
@@ -131,7 +132,7 @@ class Explore extends Component {
             <Text >{data.item.address}</Text>
             <Text >{data.item.price}</Text>
             <Text >{data.item.company.name}</Text></TouchableOpacity>*/
-    constructor() {
+   /* constructor() {
         super()
         this.state = {
             dataSource : [],
@@ -155,7 +156,7 @@ class Explore extends Component {
 
     }
     componentDidMount() {
-       const url = 'http://35.238.205.249/newapp/imagedetail'
+        const url = 'http://35.238.205.249/newapp/imagedetail'
         fetch(url)
             .then(response => response.json())
             .then((responseJson) => {
@@ -166,48 +167,41 @@ class Explore extends Component {
             })
             .catch(error => console.log(error))
         //to catch the errors if any
-    }
+    }*/
     render() {
-       /* if(this.state.loading){
-            return(
-                <View style={styles.loader}>
-                    <ActivityIndicator size="large" color="#0c9"/>
-                </View>
-            )}*/
+        /* if(this.state.loading){
+             return(
+                 <View style={styles.loader}>
+                     <ActivityIndicator size="large" color="#0c9"/>
+                 </View>
+             )}*/
 
         return (
-            this.state.isLoading
-            ?
-                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                    <ActivityIndicator size="Large" color="#330066" animating/>
-                </View>
-                :
-            <SafeAreaView style={{flex: 1, backgroundColor: '#2a2b2d'}}>
-                <View style={{flex: 1, backgroundColor: '#2a2b2d'}}>
-                    <Animated.View style={{
+                <SafeAreaView style={{flex: 1, backgroundColor: '#2a2b2d'}}>
+                    <View style={{flex: 1, backgroundColor: '#2a2b2d'}}>
+                        <Animated.View style={{
                             height: this.animatedHeaderHeight, backgroundColor: '#2a2b2d',
                             borderBottomWidth: 1, borderBottomColor: '#dddddd'
-                    }}>
-                        <View style={{
+                        }}>
+                            <View style={{
                                 flexDirection: 'row', padding: 10,
                                 backgroundColor: 'white', marginHorizontal: 20,
-                                shadowOffset: {width: '0', height: '0'},
+                                shadowOffset: {width: 0, height: 0},
                                 shadowColor: 'black',
                                 shadowOpacity: 0.2,
                                 elevation: 1,
                                 marginTop: Platform.OS == 'android' ? 30 : null
-                        }}>
+                            }}>
                                 <Icon active name="search"/>
                                 <TextInput
-                                 //   onChangeText={(text) => this.SearchFilterFunction(text)}
-                                   // value={this.state.text}
+                                    //   onChangeText={(text) => this.SearchFilterFunction(text)}
+                                    // value={this.state.text}
                                     underlineColorAndroid="transparent"
                                     placeholder="Search"
                                     placeholderTextColor="grey"
                                     style={{flex: 1, fontWeight: '700', backgroundColor: 'white', alignItems: 'center'}}
                                 />
-
-                        </View>
+                            </View>
                         </Animated.View>
                         <ScrollView
                             scrollEventThrottle={16}
@@ -227,12 +221,77 @@ class Explore extends Component {
                                         horizontal={true}
                                         showsHorizontalScrollIndicator={false}
                                     >
-                                        <Flatlist
-                                            data ={this.state.dataSource}
-                                            renderItem={this.renderItem}
-                                            keyExtractor={(item, index) => index}
-                                        />
+                                        <TouchableHighlight
+                                            onPress={() => {
+                                                this.setModalVisible(true);
+                                            }}>
+                                            <Category source={require('../assets/experiences.jpg')}
+                                                      name="Ben"
+                                                      price={205133}
+                                                      id={1}
 
+                                            />
+                                        </TouchableHighlight>
+
+                                        <TouchableHighlight
+                                            onPress={() => {
+                                                this.setModalVisible(true);
+                                            }}>
+                                            <Category source={require('../assets/experiences.jpg')}
+                                                      name="Ben"
+                                                      price={205133}
+                                                      id={1}
+
+                                            />
+                                        </TouchableHighlight>
+
+                                        <TouchableHighlight
+                                            onPress={() => {
+                                                this.setModalVisible(true);
+                                            }}>
+                                            <Category source={require('../assets/experiences.jpg')}
+                                                      name="Ben"
+                                                      price={205133}
+                                                      id={1}
+
+                                            />
+                                        </TouchableHighlight>
+
+                                        <TouchableHighlight
+                                            onPress={() => {
+                                                this.setModalVisible(true);
+                                            }}>
+                                            <Category source={require('../assets/experiences.jpg')}
+                                                      name="Ben"
+                                                      price={205133}
+                                                      id={1}
+
+                                            />
+                                        </TouchableHighlight>
+
+                                        <TouchableHighlight
+                                            onPress={() => {
+                                                this.setModalVisible(true);
+                                            }}>
+                                            <Category source={require('../assets/experiences.jpg')}
+                                                      name="Ben"
+                                                      price={205133}
+                                                      id={1}
+
+                                            />
+                                        </TouchableHighlight>
+
+                                        <TouchableHighlight
+                                            onPress={() => {
+                                                this.setModalVisible(true);
+                                            }}>
+                                            <Category source={require('../assets/experiences.jpg')}
+                                                      name="Ben"
+                                                      price={205133}
+                                                      id={1}
+
+                                            />
+                                        </TouchableHighlight>
                                     </ScrollView>
                                 </View>
                                 <View style={{marginTop: 40}}>
@@ -244,10 +303,78 @@ class Explore extends Component {
                                             horizontal={true}
                                             showsHorizontalScrollIndicator={false}
                                         >
-                                            <Flatlist
-                                                data ={this.state.dataSource}
-                                                renderItem={this.renderItem}
-                                            />                                        </ScrollView>
+                                            <TouchableHighlight
+                                                onPress={() => {
+                                                    this.setModalVisible(true);
+                                                }}>
+                                                <Category source={require('../assets/experiences.jpg')}
+                                                          name="Ben"
+                                                          price={205133}
+                                                          id={1}
+
+                                                />
+                                            </TouchableHighlight>
+
+                                            <TouchableHighlight
+                                                onPress={() => {
+                                                    this.setModalVisible(true);
+                                                }}>
+                                                <Category source={require('../assets/experiences.jpg')}
+                                                          name="Ben"
+                                                          price={205133}
+                                                          id={1}
+
+                                                />
+                                            </TouchableHighlight>
+
+                                            <TouchableHighlight
+                                                onPress={() => {
+                                                    this.setModalVisible(true);
+                                                }}>
+                                                <Category source={require('../assets/experiences.jpg')}
+                                                          name="Ben"
+                                                          price={205133}
+                                                          id={1}
+
+                                                />
+                                            </TouchableHighlight>
+
+                                            <TouchableHighlight
+                                                onPress={() => {
+                                                    this.setModalVisible(true);
+                                                }}>
+                                                <Category source={require('../assets/experiences.jpg')}
+                                                          name="Ben"
+                                                          price={205133}
+                                                          id={1}
+
+                                                />
+                                            </TouchableHighlight>
+
+                                            <TouchableHighlight
+                                                onPress={() => {
+                                                    this.setModalVisible(true);
+                                                }}>
+                                                <Category source={require('../assets/experiences.jpg')}
+                                                          name="Ben"
+                                                          price={205133}
+                                                          id={1}
+
+                                                />
+                                            </TouchableHighlight>
+
+                                            <TouchableHighlight
+                                                onPress={() => {
+                                                    this.setModalVisible(true);
+                                                }}>
+                                                <Category source={require('../assets/experiences.jpg')}
+                                                          name="Ben"
+                                                          price={205133}
+                                                          id={1}
+
+                                                />
+                                            </TouchableHighlight>
+                                        </ScrollView>
                                     </View>
                                 </View>
                                 <View style={{marginTop: 40}}>
@@ -262,61 +389,128 @@ class Explore extends Component {
                                             horizontal={true}
                                             showsHorizontalScrollIndicator={false}
                                         >
-                                            <Flatlist
-                                                data ={this.state.dataSource}
-                                                renderItem={this.renderItem}
-                                            />
+                                            <TouchableHighlight
+                                                onPress={() => {
+                                                    this.setModalVisible(true);
+                                                }}>
+                                                <Category source={require('../assets/experiences.jpg')}
+                                                          name="Ben"
+                                                          price={205133}
+                                                          id={1}
+
+                                                />
+                                            </TouchableHighlight>
+
+                                            <TouchableHighlight
+                                                onPress={() => {
+                                                    this.setModalVisible(true);
+                                                }}>
+                                                <Category source={require('../assets/experiences.jpg')}
+                                                          name="Ben"
+                                                          price={205133}
+                                                          id={1}
+
+                                                />
+                                            </TouchableHighlight>
+
+                                            <TouchableHighlight
+                                                onPress={() => {
+                                                    this.setModalVisible(true);
+                                                }}>
+                                                <Category source={require('../assets/experiences.jpg')}
+                                                          name="Ben"
+                                                          price={205133}
+                                                          id={1}
+
+                                                />
+                                            </TouchableHighlight>
+
+                                            <TouchableHighlight
+                                                onPress={() => {
+                                                    this.setModalVisible(true);
+                                                }}>
+                                                <Category source={require('../assets/experiences.jpg')}
+                                                          name="Ben"
+                                                          price={205133}
+                                                          id={1}
+
+                                                />
+                                            </TouchableHighlight>
+
+                                            <TouchableHighlight
+                                                onPress={() => {
+                                                    this.setModalVisible(true);
+                                                }}>
+                                                <Category source={require('../assets/experiences.jpg')}
+                                                          name="Ben"
+                                                          price={205133}
+                                                          id={1}
+
+                                                />
+                                            </TouchableHighlight>
+
+                                            <TouchableHighlight
+                                                onPress={() => {
+                                                    this.setModalVisible(true);
+                                                }}>
+                                                <Category source={require('../assets/experiences.jpg')}
+                                                          name="Ben"
+                                                          price={205133}
+                                                          id={1}
+
+                                                />
+                                            </TouchableHighlight>
                                         </ScrollView>
                                     </View>
                                 </View>
                             </View>
                         </ScrollView>
 
-                    <Modal
-                        animationType="slide"
-                        transparent={false}
-                        visible={this.state.modalVisible}
-                        onRequestClose={() => {
-                            Alert.alert('Modal has been closed.');
-                        }}>
-                        <ScrollView
-                            scrollEventThrottle={16}
-                            onScroll={Animated.event(
-                                [
-                                    {nativeEvent: {contentOffset: {y: this.scrollY}}}
-                                ]
-                            )}
-                        >
-                            <View style={{backgroundColor: '#2a2b2d' }}>
-                                <View style={{ height: 700, width: '390', marginLeft: 10, marginRight: 10,marginTop: 10,
-                                    borderWidth: 0.5, borderColor: '#dddddd' }}>
-                                    <View style={{ flex: 2 }}>
-                                        <Image source={require('../assets/experiences.jpg')}
-                                               style={{ flex: 1, width: '390', height: 200, resizeMode: 'cover' }}
-                                        />
-                                    </View>
-                                    <View style={{ flex: 1, paddingLeft: 10, paddingTop: 10 }}>
-                                        <Text style={{ fontSize: 20, fontWeight: '700' }}>Heloo</Text>
-                                        <Text style={{ fontSize: 14, fontWeight: '500' }}>Byeeee</Text>
-                                    </View>
-
-                                    <TouchableHighlight
-                                        onPress={() => {
-                                            this.setModalVisible(!this.state.modalVisible);
-                                        }}>
-                                        <View style={{height: 50,width: '100', borderWidth: 0.3, borderColor:'#dddddd',
-                                            backgroundColor: '#2a2b2d'}}>
-                                            <Text style={{fontSize: 16, fontWeight: '600', color: 'white'}}>Back
-                                            </Text>
+                        <Modal
+                            animationType="slide"
+                            transparent={false}
+                            visible={this.state.modalVisible}
+                            onRequestClose={() => {
+                                Alert.alert('Modal has been closed.');
+                            }}>
+                            <ScrollView
+                                scrollEventThrottle={16}
+                                onScroll={Animated.event(
+                                    [
+                                        {nativeEvent: {contentOffset: {y: this.scrollY}}}
+                                    ]
+                                )}
+                            >
+                                <View style={{backgroundColor: '#2a2b2d' }}>
+                                    <View style={{ height: 700, width: 390, marginLeft: 10, marginRight: 10,marginTop: 10,
+                                        borderWidth: 0.5, borderColor: '#dddddd',backgroundColor: 'white' }}>
+                                        <View style={{ flex: 2 }}>
+                                            <Image source={require('../assets/experiences.jpg')}
+                                                   style={{ flex: 1, width: 390, height: 200, resizeMode: 'cover' }}
+                                            />
                                         </View>
-                                    </TouchableHighlight>
+                                        <View style={{ flex: 1, paddingLeft: 10, paddingTop: 10 }}>
+                                            <Text style={{ fontSize: 20, fontWeight: '700' }}>Heloo</Text>
+                                            <Text style={{ fontSize: 14, fontWeight: '500' }}>Byeeee</Text>
+                                        </View>
+
+                                        <TouchableHighlight
+                                            onPress={() => {
+                                                this.setModalVisible(!this.state.modalVisible);
+                                            }}>
+                                            <View style={{height: 50,width: 80, borderWidth: 0.3, borderColor:'#dddddd',
+                                                backgroundColor: '#2a2b2d', marginLeft: 10}}>
+                                                <Text style={{fontSize: 25, fontWeight: '600', color: 'white', alignItems: 'center'}}>Back
+                                                </Text>
+                                            </View>
+                                        </TouchableHighlight>
+                                    </View>
                                 </View>
-                            </View>
-                        </ScrollView>
-                    </Modal>
+                            </ScrollView>
+                        </Modal>
 
 
-                </View>
+                    </View>
                 </SafeAreaView>
         );
     }
