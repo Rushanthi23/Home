@@ -24,8 +24,6 @@ import {Navigator} from 'react-native-deprecated-custom-components';
 import { createStackNavigator, createAppContainer } from 'react-navigation';
 import MapView from "react-native-maps";
 import Category from './components/Explore/Category'
-import Home from './components/Explore/Home'
-import Saved from "./Saved";
 const { height, width } = Dimensions.get('window')
 
 //type Props = {};

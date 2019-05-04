@@ -6,7 +6,6 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import Explore from './screens/Explore'
 import Saved from './screens/Saved'
 import Inbox from './screens/Inbox'
-import Trips from './screens/Trips'
 
 const TabNavigator = createBottomTabNavigator({
     Home: { screen: Explore },
