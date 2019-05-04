@@ -16,7 +16,8 @@ import {
     TouchableOpacity,
     ActivityIndicator,
     Modal,
-    TouchableHighlight, Button
+    TouchableHighlight, Button,
+    FlatList
 } from "react-native";
 import {Icon} from "native-base";
 import {Navigator} from 'react-native-deprecated-custom-components';
@@ -38,7 +39,7 @@ class Explore extends Component {
         this.setState({modalVisible: visible});
     }
 
-    constructor(props) {
+    /*constructor(props) {
         super(props);
         this.state = {
             loading: true,
@@ -78,6 +79,19 @@ class Explore extends Component {
     }
 
 
+    ListViewItemSeparator = () => {
+        return (
+            <View
+                style={{
+                    height: .5,
+                    width: "100%",
+                    backgroundColor: "#000",
+                }}
+            />
+        );
+    }
+*/
+
     componentWillMount() {
 
         this.scrollY = new Animated.Value(0)
@@ -113,20 +127,63 @@ class Explore extends Component {
 
 
     }
-    renderItem=(data)=>
+    /*renderItem=(data)=>
         <TouchableOpacity style={styles.list}>
             <Text>{data.item.name}</Text>
             <Text >{data.item.address}</Text>
             <Text >{data.item.price}</Text>
-            <Text >{data.item.company.name}</Text></TouchableOpacity>
+            <Text >{data.item.company.name}</Text></TouchableOpacity>*/
+    constructor() {
+        super()
+        this.state = {
+            dataSource : [],
+            isLoading: true
+        }
+    }
+    renderItem = (item) => {
+        return(
+            <TouchableHighlight
+                onPress={() => {
+                    this.setModalVisible(true);
+                }}>
+                <Category source={{uri: item.url}}
+                          name={item.name}
+                          price={20000}
+                          id={item.id}
+
+                />
+            </TouchableHighlight>
+        )
+
+    }
+    componentDidMount() {
+       const url = 'http://35.238.205.249/newapp/imagedetail'
+        fetch(url)
+            .then(response => response.json())
+            .then((responseJson) => {
+                this.setState({
+                    dataSource: responseJson,
+                    isLoading: false
+                })
+            })
+            .catch(error => console.log(error))
+        //to catch the errors if any
+    }
     render() {
-        if(this.state.loading){
+       /* if(this.state.loading){
             return(
                 <View style={styles.loader}>
                     <ActivityIndicator size="large" color="#0c9"/>
                 </View>
-            )}
+            )}*/
+
         return (
+            this.state.isLoading
+            ?
+                <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+                    <ActivityIndicator size="Large" color="#330066" animating/>
+                </View>
+                :
             <SafeAreaView style={{flex: 1, backgroundColor: '#2a2b2d'}}>
                 <View style={{flex: 1, backgroundColor: '#2a2b2d'}}>
                     <Animated.View style={{
@@ -136,7 +193,7 @@ class Explore extends Component {
                         <View style={{
                                 flexDirection: 'row', padding: 10,
                                 backgroundColor: 'white', marginHorizontal: 20,
-                                shadowOffset: {width: 0, height: 0},
+                                shadowOffset: {width: '0', height: '0'},
                                 shadowColor: 'black',
                                 shadowOpacity: 0.2,
                                 elevation: 1,
@@ -144,28 +201,14 @@ class Explore extends Component {
                         }}>
                                 <Icon active name="search"/>
                                 <TextInput
-                                    onChangeText={(text) => this.SearchFilterFunction(text)}
-                                    value={this.state.text}
+                                 //   onChangeText={(text) => this.SearchFilterFunction(text)}
+                                   // value={this.state.text}
                                     underlineColorAndroid="transparent"
                                     placeholder="Search"
                                     placeholderTextColor="grey"
                                     style={{flex: 1, fontWeight: '700', backgroundColor: 'white', alignItems: 'center'}}
                                 />
-                            <ListView
 
-                                dataSource={this.state.dataSource}
-
-                                renderSeparator= {this.ListViewItemSeparator}
-
-                                renderRow={(rowData) =>
-                                    <Text style={styles.rowViewContainer}
-                                    onPress={this.GetListViewItem.bind(this, rowData.name)} >{rowData.name}</Text>}
-
-                                enableEmptySections={true}
-
-                                style={{marginTop: 10}}
-
-                            />
                         </View>
                         </Animated.View>
                         <ScrollView
@@ -186,77 +229,12 @@ class Explore extends Component {
                                         horizontal={true}
                                         showsHorizontalScrollIndicator={false}
                                     >
-                                        <TouchableHighlight
-                                            onPress={() => {
-                                                this.setModalVisible(true);
-                                            }}>
-                                            <Category source={{uri: this.state.dataSource.url}}
-                                                      name={this.state.dataSource.name}
-                                                      price={this.state.dataSource.price}
-                                                      id={this.state.dataSource.id}
+                                        <Flatlist
+                                            data ={this.state.dataSource}
+                                            renderItem={this.renderItem}
+                                            keyExtractor={(item, index) => index}
+                                        />
 
-                                            />
-                                        </TouchableHighlight>
-
-                                        <TouchableHighlight
-                                            onPress={() => {
-                                                this.setModalVisible(true);
-                                            }}>
-                                            <Category source={{uri: this.state.dataSource.url}}
-                                                      name={this.state.dataSource.name}
-                                                      price={this.state.dataSource.price}
-                                                      id={this.state.dataSource.id}
-
-                                            />
-                                        </TouchableHighlight>
-
-                                        <TouchableHighlight
-                                            onPress={() => {
-                                                this.setModalVisible(true);
-                                            }}>
-                                            <Category source={{uri: this.state.dataSource.url}}
-                                                      name={this.state.dataSource.name}
-                                                      price={this.state.dataSource.price}
-                                                      id={this.state.dataSource.id}
-
-                                            />
-                                        </TouchableHighlight>
-
-                                        <TouchableHighlight
-                                            onPress={() => {
-                                                this.setModalVisible(true);
-                                            }}>
-                                            <Category source={{uri: this.state.dataSource.url}}
-                                                      name={this.state.dataSource.name}
-                                                      price={this.state.dataSource.price}
-                                                      id={this.state.dataSource.id}
-
-                                            />
-                                        </TouchableHighlight>
-
-                                        <TouchableHighlight
-                                            onPress={() => {
-                                                this.setModalVisible(true);
-                                            }}>
-                                            <Category source={{uri: this.state.dataSource.url}}
-                                                      name={this.state.dataSource.name}
-                                                      price={this.state.dataSource.price}
-                                                      id={this.state.dataSource.id}
-
-                                            />
-                                        </TouchableHighlight>
-
-                                        <TouchableHighlight
-                                            onPress={() => {
-                                                this.setModalVisible(true);
-                                            }}>
-                                            <Category source={{uri: this.state.dataSource.url}}
-                                                      name={this.state.dataSource.name}
-                                                      price={this.state.dataSource.price}
-                                                      id={this.state.dataSource.id}
-
-                                            />
-                                        </TouchableHighlight>
                                     </ScrollView>
                                 </View>
                                 <View style={{marginTop: 40}}>
@@ -268,85 +246,17 @@ class Explore extends Component {
                                             horizontal={true}
                                             showsHorizontalScrollIndicator={false}
                                         >
-                                            <TouchableHighlight
-                                                onPress={() => {
-                                                    this.setModalVisible(true);
-                                                }}>
-                                                <Category source={{uri: this.state.dataSource.url}}
-                                                          name={this.state.dataSource.name}
-                                                          price={this.state.dataSource.price}
-                                                          id={this.state.dataSource.id}
-
-                                                />
-                                            </TouchableHighlight>
-
-                                            <TouchableHighlight
-                                                onPress={() => {
-                                                    this.setModalVisible(true);
-                                                }}>
-                                                <Category source={{uri: this.state.dataSource.url}}
-                                                          name={this.state.dataSource.name}
-                                                          price={this.state.dataSource.price}
-                                                          id={this.state.dataSource.id}
-
-                                                />
-                                            </TouchableHighlight>
-
-                                            <TouchableHighlight
-                                                onPress={() => {
-                                                    this.setModalVisible(true);
-                                                }}>
-                                                <Category source={{uri: this.state.dataSource.url}}
-                                                          name={this.state.dataSource.name}
-                                                          price={this.state.dataSource.price}
-                                                          id={this.state.dataSource.id}
-
-                                                />
-                                            </TouchableHighlight>
-
-                                            <TouchableHighlight
-                                                onPress={() => {
-                                                    this.setModalVisible(true);
-                                                }}>
-                                                <Category source={{uri: this.state.dataSource.url}}
-                                                          name={this.state.dataSource.name}
-                                                          price={this.state.dataSource.price}
-                                                          id={this.state.dataSource.id}
-
-                                                />
-                                            </TouchableHighlight>
-
-                                            <TouchableHighlight
-                                                onPress={() => {
-                                                    this.setModalVisible(true);
-                                                }}>
-                                                <Category source={{uri: this.state.dataSource.url}}
-                                                          name={this.state.dataSource.name}
-                                                          price={this.state.dataSource.price}
-                                                          id={this.state.dataSource.id}
-
-                                                />
-                                            </TouchableHighlight>
-
-                                            <TouchableHighlight
-                                                onPress={() => {
-                                                    this.setModalVisible(true);
-                                                }}>
-                                                <Category source={{uri: this.state.dataSource.url}}
-                                                          name={this.state.dataSource.name}
-                                                          price={this.state.dataSource.price}
-                                                          id={this.state.dataSource.id}
-
-                                                />
-                                            </TouchableHighlight>
-                                        </ScrollView>
+                                            <Flatlist
+                                                data ={this.state.dataSource}
+                                                renderItem={this.renderItem}
+                                            />                                        </ScrollView>
                                     </View>
                                 </View>
                                 <View style={{marginTop: 40}}>
                                     <Text style={{fontSize: 24, fontWeight: '700', paddingHorizontal: 20}}>
                                         Recently added Apartments
                                     </Text>
-                                    <Text style={{fontWeight: '100', marginTop: 10, paddingHorizontal: 20}}>
+                                    <Text style={{fontWeight: '300', marginTop: 10, paddingHorizontal: 20}}>
                                         A new selection of homes verified for quality & comfort
                                     </Text>
                                     <View style={{height: 250, marginTop: 20}}>
@@ -354,77 +264,10 @@ class Explore extends Component {
                                             horizontal={true}
                                             showsHorizontalScrollIndicator={false}
                                         >
-                                            <TouchableHighlight
-                                                onPress={() => {
-                                                    this.setModalVisible(true);
-                                                }}>
-                                                <Category source={{uri: this.state.dataSource.url}}
-                                                          name={this.state.dataSource.name}
-                                                          price={this.state.dataSource.price}
-                                                          id={this.state.dataSource.id}
-
-                                                />
-                                            </TouchableHighlight>
-
-                                            <TouchableHighlight
-                                                onPress={() => {
-                                                    this.setModalVisible(true);
-                                                }}>
-                                                <Category source={{uri: this.state.dataSource.url}}
-                                                          name={this.state.dataSource.name}
-                                                          price={this.state.dataSource.price}
-                                                          id={this.state.dataSource.id}
-
-                                                />
-                                            </TouchableHighlight>
-
-                                            <TouchableHighlight
-                                                onPress={() => {
-                                                    this.setModalVisible(true);
-                                                }}>
-                                                <Category source={{uri: this.state.dataSource.url}}
-                                                          name={this.state.dataSource.name}
-                                                          price={this.state.dataSource.price}
-                                                          id={this.state.dataSource.id}
-
-                                                />
-                                            </TouchableHighlight>
-
-                                            <TouchableHighlight
-                                                onPress={() => {
-                                                    this.setModalVisible(true);
-                                                }}>
-                                                <Category source={{uri: this.state.dataSource.url}}
-                                                          name={this.state.dataSource.name}
-                                                          price={this.state.dataSource.price}
-                                                          id={this.state.dataSource.id}
-
-                                                />
-                                            </TouchableHighlight>
-
-                                            <TouchableHighlight
-                                                onPress={() => {
-                                                    this.setModalVisible(true);
-                                                }}>
-                                                <Category source={{uri: this.state.dataSource.url}}
-                                                          name={this.state.dataSource.name}
-                                                          price={this.state.dataSource.price}
-                                                          id={this.state.dataSource.id}
-
-                                                />
-                                            </TouchableHighlight>
-
-                                            <TouchableHighlight
-                                                onPress={() => {
-                                                    this.setModalVisible(true);
-                                                }}>
-                                                <Category source={{uri: this.state.dataSource.url}}
-                                                          name={this.state.dataSource.name}
-                                                          price={this.state.dataSource.price}
-                                                          id={this.state.dataSource.id}
-
-                                                />
-                                            </TouchableHighlight>
+                                            <Flatlist
+                                                data ={this.state.dataSource}
+                                                renderItem={this.renderItem}
+                                            />
                                         </ScrollView>
                                     </View>
                                 </View>
@@ -446,31 +289,31 @@ class Explore extends Component {
                                 ]
                             )}
                         >
-
-                                <View style={{ height: 700, width: 390, marginLeft: 10, marginRight: 10,marginTop: 10,
+                            <View style={{backgroundColor: '#2a2b2d' }}>
+                                <View style={{ height: 700, width: '390', marginLeft: 10, marginRight: 10,marginTop: 10,
                                     borderWidth: 0.5, borderColor: '#dddddd' }}>
                                     <View style={{ flex: 2 }}>
                                         <Image source={require('../assets/experiences.jpg')}
-                                               style={{ flex: 1, width: 390, height: 200, resizeMode: 'cover' }}
+                                               style={{ flex: 1, width: '390', height: 200, resizeMode: 'cover' }}
                                         />
                                     </View>
                                     <View style={{ flex: 1, paddingLeft: 10, paddingTop: 10 }}>
-                                        <Text style={{ fontSize: 20, fontWeight: '300' }}>Heloo</Text>
-                                        <Text style={{ fontSize: 14, fontWeight: 'bold' }}>Byeeee</Text>
+                                        <Text style={{ fontSize: 20, fontWeight: '700' }}>Heloo</Text>
+                                        <Text style={{ fontSize: 14, fontWeight: '500' }}>Byeeee</Text>
                                     </View>
 
                                     <TouchableHighlight
                                         onPress={() => {
                                             this.setModalVisible(!this.state.modalVisible);
                                         }}>
-                                        <View style={{height: 50,width: 100, borderWidth: 0.3, borderColor:'#dddddd',
+                                        <View style={{height: 50,width: '100', borderWidth: 0.3, borderColor:'#dddddd',
                                             backgroundColor: '#2a2b2d'}}>
-                                            <Text style={{fontSize: 16, fontWeight: '200', shadowColor: 'white'}}>Back
+                                            <Text style={{fontSize: 16, fontWeight: '600', color: 'white'}}>Back
                                             </Text>
                                         </View>
                                     </TouchableHighlight>
                                 </View>
-
+                            </View>
                         </ScrollView>
                     </Modal>
 
